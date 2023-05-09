@@ -29,7 +29,6 @@ from numpy.linalg import inv
 
 
 def fitting(da):
-
     x_new = np.linspace(0.01, 1360, 1000)
     x_a=np.array(da['ghi_obs'])
     y_a=np.array(da['ghi_mod'])
@@ -44,7 +43,6 @@ def fitting(da):
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def fitting_pred(da):
-
     x_new = np.linspace(0.01, 1360, 1000)
     x_a=np.array(da['ghi_obs'])
     y_a=np.array(da['GHI_pred_improved_fin'])
@@ -56,10 +54,8 @@ def fitting_pred(da):
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
-###########################
 
 def kf_fitting(da):
-
     x_new = np.linspace(0.01, 1360, 1000)
     x_a=np.array(da['ghi_obs'])
     y_a=np.array(da['GHI_pred_kf_only'])
@@ -73,7 +69,6 @@ def kf_fitting(da):
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def kf_fitting_pred(da):
-
     x_new = np.linspace(0.01, 1360, 1000)
     x_a=np.array(da['ghi_obs'])
     y_a=np.array(da['GHI_pred_kf_only'])
@@ -136,10 +131,6 @@ def ts_all(res, da_mean,dir_path_recursive):
         writerObj.writerow(kf) 
         fileObj.close()
 
-############################
-############################
-############################ 
-
 def scat_cloudy_all(res, da_mean,dir_path_recursive):
     x_new = np.linspace(0.01, 1360, 1000)
     plt_da = da_mean
@@ -197,11 +188,7 @@ def scat_cloudy_all(res, da_mean,dir_path_recursive):
         writerObj.writerow(wrf)
         writerObj.writerow(kf)
         f_object.close()
-        
-
-############################
-############################
-############################         
+   
 def scat_clear_all(res, da_mean,dir_path_recursive):
 
     x_new = np.linspace(0.01, 1360, 1000)
