@@ -34,7 +34,6 @@ def fitting(da):
     coef, p = kendalltau(xaa,yaa)
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
-    
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def fitting_pred(da):
@@ -57,7 +56,6 @@ def kf_fitting_pred(da):
     y_a=np.array(da['GHI_pred_kf_only'])
     xaa = x_a[~np.isnan(x_a)]
     yaa = y_a[~np.isnan(y_a)]
-
     slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
     pearson_corr, pearson_pval = pearsonr(xaa,yaa)
     coef, p = kendalltau(xaa,yaa)
@@ -102,7 +100,6 @@ def ts_all(res, da_mean,dir_path_recursive):
     ax00.text( 100, 1100,'KF-WRF RMSE = %0.2f'%kf_fitting_pred(da_mean)[7], fontsize=5, color='green')
     ax00.legend(['Obs','KF only'], bbox_to_anchor=(1.02, 0.98), prop={'size': 5},loc=2, borderaxespad=0.)
     ax00.set_xticklabels([])
-    
     plt.savefig(f"{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}_all_Manila_ts_" + str(res) +"km.png", dpi=500, frameon=False, facecolor='white', bbox_inches="tight")
     
     with open(f'{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}.csv', 'w') as fileObj:
@@ -161,7 +158,6 @@ def scat_cloudy_all(res, da_mean,dir_path_recursive):
     ax00.set_ylim(0,1360)
     ax00.set_xlim(0,1360)
     ax00.text( 800, 1600,'Cloudy Periods', fontsize=5, color='k')
-    
     plt.savefig(f"{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}_all_cloudy_kf_Manila_scatplot_" + str((res)) + "km.png", dpi=500, frameon=False, facecolor='white', bbox_inches="tight")
 
     with open(f'{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}.csv',  'a') as f_object:
@@ -220,7 +216,6 @@ def scat_clear_all(res, da_mean,dir_path_recursive):
     ax00.set_ylim(0,1360)
     ax00.set_xlim(0,1360)
     ax00.text( 800, 1600,'Clear Sky Periods', fontsize=5, color='k')
-    
     plt.savefig(f"{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}_all_clear_kf_Manila_scatplot_" + str((res)) + "km.png", dpi=500, frameon=False, facecolor='white', bbox_inches="tight")
    
     with open(f'{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}.csv', 'a') as f_object:
