@@ -55,18 +55,6 @@ def fitting_pred(da):
     mae = mean_absolute_error(xaa, yaa)
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
-def kf_fitting(da):
-    x_new = np.linspace(0.01, 1360, 1000)
-    x_a=np.array(da['ghi_obs'])
-    y_a=np.array(da['GHI_pred_kf_only'])
-    xaa = x_a[~np.isnan(x_a)]
-    yaa = y_a[~np.isnan(y_a)]
-    slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
-    pearson_corr, pearson_pval = pearsonr(xaa,yaa)
-    coef, p = kendalltau(xaa,yaa)
-    rms = mean_squared_error(xaa, yaa, squared=False)
-    mae = mean_absolute_error(xaa, yaa)
-    return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def kf_fitting_pred(da):
     x_new = np.linspace(0.01, 1360, 1000)
