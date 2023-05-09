@@ -38,20 +38,9 @@ def fitting(da):
     slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
     pearson_corr, pearson_pval = pearsonr(xaa,yaa)
     coef, p = kendalltau(xaa,yaa)
-    #print('Kendall correlation coefficient: %.3f' % coef)
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
-    alpha = 0.01
-    #if p > alpha:
-        #print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
-    #else:
-        #print('Samples are correlated (reject H0) p=%.3f' % p)
-
-    #print('Pearsons correlation: %.3f' % pearson_corr)
-    #print('Pearsons p_value: %.3f' % pearson_pval)
-    #print('RMS: %.3f' % rms)
-    #print('MAE: %.3f' % mae)
-    #print('###########################################')
+    
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def fitting_pred(da):
@@ -61,25 +50,11 @@ def fitting_pred(da):
     y_a=np.array(da['GHI_pred_improved_fin'])
     xaa = x_a[~np.isnan(x_a)]
     yaa = y_a[~np.isnan(y_a)]
-
     slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
     pearson_corr, pearson_pval = pearsonr(xaa,yaa)
     coef, p = kendalltau(xaa,yaa)
-    #print('Kendall correlation coefficient: %.3f' % coef)
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
-    
-    alpha = 0.01
-    #if p > alpha:
-        #print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
-    #else:
-        #print('Samples are correlated (reject H0) p=%.3f' % p)
-
-    #print('Pearsons correlation: %.3f' % pearson_corr)
-    #print('RMS: %.3f' % rms)
-    #print('MAE: %.3f' % mae)
-    #print('###########################################')
-    
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 ###########################
 
@@ -93,20 +68,8 @@ def kf_fitting(da):
     slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
     pearson_corr, pearson_pval = pearsonr(xaa,yaa)
     coef, p = kendalltau(xaa,yaa)
-    #print('Kendall correlation coefficient: %.3f' % coef)
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
-    alpha = 0.01
-    #if p > alpha:
-        #print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
-    #else:
-        #print('Samples are correlated (reject H0) p=%.3f' % p)
-
-    #print('Pearsons correlation: %.3f' % pearson_corr)
-    #print('Pearsons p_value: %.3f' % pearson_pval)
-    #print('RMS: %.3f' % rms)
-    #print('MAE: %.3f' % mae)
-    #print('###########################################')
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
 
 def kf_fitting_pred(da):
@@ -120,25 +83,9 @@ def kf_fitting_pred(da):
     slope_a, intercept_a, r_value_a, p_value_a, std_err_a = stats.linregress(x_a,y_a)
     pearson_corr, pearson_pval = pearsonr(xaa,yaa)
     coef, p = kendalltau(xaa,yaa)
-    #print('Kendall correlation coefficient: %.3f' % coef)
     rms = mean_squared_error(xaa, yaa, squared=False)
     mae = mean_absolute_error(xaa, yaa)
-    
-    alpha = 0.01
-    #if p > alpha:
-        #print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
-    #else:
-        #print('Samples are correlated (reject H0) p=%.3f' % p)
-
-    #print('Pearsons correlation: %.3f' % pearson_corr)
-    #print('RMS: %.3f' % rms)
-    #print('MAE: %.3f' % mae)
-    #print('###########################################')
-    
     return (pearson_corr, pearson_pval, slope_a, intercept_a, r_value_a, p_value_a, std_err_a, rms, mae)
-
-
-
 
 def ts_all(res, da_mean,dir_path_recursive):
     da_mean= da_mean
@@ -155,9 +102,7 @@ def ts_all(res, da_mean,dir_path_recursive):
     ensemble_member = dir_path_recursive.split('/')[1]
     domain = dir_path_recursive.split('/')[2]
 
-
     ax00.text(100, 1600, f'Manila Observatory WRF-Solar validation( {res} km | initialized 00 UTC previous day)\nYear: {year} | training period: {nb_historical_days}',  fontsize=5)
-    #ax00.text(100, 1300, 'ensmean v obs',  fontsize=5)   
     ax00.text( 100, 1100,'WRF RMSE = %0.2f'%fitting(da_mean)[7], fontsize=5, color='red')
     ax00.legend(['Obs','WRF-' + str(res) + 'km'], bbox_to_anchor=(1.02, 0.98), prop={'size': 5},loc=2, borderaxespad=0.)
     ax00.set_xticklabels([])
@@ -180,9 +125,7 @@ def ts_all(res, da_mean,dir_path_recursive):
     ax00.legend(['Obs','KF only'], bbox_to_anchor=(1.02, 0.98), prop={'size': 5},loc=2, borderaxespad=0.)
     ax00.set_xticklabels([])
     
-    
     plt.savefig(f"{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}_all_Manila_ts_" + str(res) +"km.png", dpi=500, frameon=False, facecolor='white', bbox_inches="tight")
-    
     
     with open(f'{dir_path_recursive}/{ensemble_member}_{domain}_{nb_historical_days}.csv', 'w') as fileObj:
         writerObj = csv.writer(fileObj)
@@ -192,7 +135,6 @@ def ts_all(res, da_mean,dir_path_recursive):
         writerObj.writerow(wrf)
         writerObj.writerow(kf) 
         fileObj.close()
-
 
 ############################
 ############################
@@ -298,7 +240,6 @@ def scat_clear_all(res, da_mean,dir_path_recursive):
     ax00.set_xlim(0,1360)
     ax00.text( -500, -800,'Observed\nGHI (W/m$^2$)', fontsize=5, color='k')
 
-        
     ax00 = fig.add_subplot(gs[0:1, 4:7])
     ax00.scatter(x=plt_da['ghi_obs'],y=plt_da['GHI_pred_kf_only'],c='green',s=0.1,alpha=0.6)
     plt.plot(x_new,x_new,c='gray',linewidth=0.1)
