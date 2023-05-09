@@ -15,17 +15,12 @@ import matplotlib.gridspec as gridspec
 import datetime
 import math
 
-from tqdm import tqdm
-
 from scipy import stats
 from scipy.stats import pearsonr
 from scipy.stats import kendalltau
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
-
-from numpy import dot
-from numpy.linalg import inv
 
 
 def fitting(da):
