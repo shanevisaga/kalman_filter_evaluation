@@ -1,41 +1,16 @@
 from __const__ import *
-from plotting import *
 
-import glob
-import os
-
-import pandas as pd
-import csv
-
-import matplotlib.dates as md
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import matplotlib.gridspec as gridspec
-
-import datetime
-import math
-
-from tqdm import tqdm
-
-from scipy import stats
-from scipy.stats import pearsonr
-from scipy.stats import kendalltau
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
-
-from numpy import dot
-from numpy.linalg import inv
 
 def prep_input():
-    a = pd.read_csv('with_flags.csv')
+    obs_path = f'with_flags_{seas}.csv'
+    a = pd.read_csv(obs_path)
     a['Time'] = pd.to_datetime(a['Time'])
 
     a['ghi_obs'] = a['SPN1_Total_Solar']
     a.columns
     
-    path = f'/Users/apple/Desktop/Others/Python_Codes/wrf_solar/csv_{year}_runs/' # use your path
-    all_files = glob.glob(os.path.join(path, "*.csv"))
+    mod_path = f'csv_{seas}/'
+    all_files = glob.glob(os.path.join(mod_path, "*.csv"))
 
     mod_ = []
 
@@ -53,8 +28,8 @@ def prep_input():
         
     mod_ = pd.concat(mod_)
 
-    mod_ = mod_[['Time', 'ens', 'ghi', 'swddni', 'coszen', 'swddif', 'temp',  'Q2_rel', 'u10', 'v10',  'station_name', 'domain']]
-    mod_.columns = ['Time', 'ens', 'ghi_mod', 'swddni', 'coszen', 'swddif', 'T2',  'Humi_rel', 'U10', 'V10', 'station_name', 'domain']
+    mod_ = mod_[['Time', 'ens', 'ghi', 'ghi_clear', 'swddni', 'coszen', 'swddif', 'temp',  'Q2_rel', 'u10', 'v10',  'station_name', 'domain']]
+    mod_.columns = ['Time', 'ens', 'ghi_mod', 'ghi_clear', 'swddni', 'coszen', 'swddif', 'T2',  'Humi_rel', 'U10', 'V10', 'station_name', 'domain']
 
     # wind speed in both x/y direction
     if mod_['U10'].max() > 2:
@@ -134,7 +109,7 @@ def prep_opt(mod_, a,ens,domain):
            'SPN1_Total_Solar_N', 't2_lim', 'cossza_noon', 'FT_t', 'FT_TOA', 'FT_TOA_t', 't3_llim', 't3_ulim',\
            'Diffuse_Ratio', 'SPN1_Diff_Solar_N',\
            'sigma', 'ghi_cc_val', 'dhi_cc_val', 't1_lim', 'flag_clear',\
-           'ens', 'domain','station_name', 'ghi_mod', \
+           'ens', 'domain','station_name', 'ghi_mod', 'ghi_clear',\
            'T2',  'Humi_rel', 'U10', 'V10', \
            'Error_rel', 'Kc_GHI_pred', 'Kc_GHI_obs', 'Kc_obs_bias',\
            'Kc_GHI_pred_improved']]
