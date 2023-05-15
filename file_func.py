@@ -74,7 +74,7 @@ def prep_opt(mod_, a,ens,domain):
     df['Kc_GHI_pred'] = df['Kc_GHI_pred'].replace(np.inf,np.nan)
 
     ##############################
-    #CHECK THIS###################
+    ##############################
     ##############################
     df['Kc_GHI_obs'] = df['ghi_obs']/df['GHI_in']
 
@@ -97,7 +97,7 @@ def prep_opt(mod_, a,ens,domain):
     df_temp['Kc_GHI_pred_improved'] = np.nan 
 
     ##############################
-    #CHECK THIS###################
+    ##############################
     ##############################
     df_temp['predicted_coefs'] = np.nan 
     df_temp =  df_temp[['Time', 'LT','CMP22_Total_Solar', 'SPN1_Total_Solar',\
