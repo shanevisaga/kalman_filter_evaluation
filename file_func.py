@@ -78,7 +78,7 @@ def prep_opt(mod_, a,ens,domain):
     ##############################
     df['Kc_GHI_obs'] = df['ghi_obs']/df['GHI_in']
 
-    #line 223
+
     # create clear-sky index column for observed errors 
     df['Kc_obs_bias'] = df['Kc_GHI_pred'] - df['Kc_GHI_obs']
 
