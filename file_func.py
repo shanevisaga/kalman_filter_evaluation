@@ -41,8 +41,6 @@ def prep_input():
 def prep_opt(mod_, a,ens,domain):
     
     mod_d01 = mod_[(mod_['ens']== ens) & (mod_['domain']== domain) & (mod_['station_name']== station_name)]
-    mod_d02 = mod_[(mod_['ens']== ens) & (mod_['domain']== domain) & (mod_['station_name']== station_name)]
-    
     mod_d01  = mod_d01.set_index('Time')
     mod_d01  = mod_d01.resample(resolution).interpolate(method='linear')
     mod_d01  = mod_d01.reset_index(drop = False)
