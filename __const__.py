@@ -36,7 +36,7 @@ station_name = 'MO'
 tz = pytz.timezone("Asia/Manila")
 resolution = '10Min'
 
-idx_t = 0
+
 recursive_calculation_covariance_matrices = True
 add_noise_in_predictions = False
 nonlinear_predictions = False
