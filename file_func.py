@@ -70,7 +70,6 @@ def prep_opt(mod_, a,ens,domain):
         # recalculate relative error after removing some observations
         df['Error_rel'] = df.apply(lambda row : calculate_relative_errors(row['ghi_mod'], row['ghi_obs']), axis = 1)
 
-    #line 221
     df['Kc_GHI_pred'] = df['ghi_mod']/df['GHI_in']
     df['Kc_GHI_pred'] = df['Kc_GHI_pred'].replace(np.inf,np.nan)
 
